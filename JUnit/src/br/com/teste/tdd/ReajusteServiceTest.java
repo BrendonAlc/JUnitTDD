@@ -13,10 +13,23 @@ import br.com.service.tdd.ReajusteService;
 
 public class ReajusteServiceTest {
 
+	private ReajusteService service;
+	private Funcionario funcionario;
+	
+	@BeforeEach //Iniciar este método antes de cada um dos métodos de teste
+	public void inicializar() {
+		this.service = new ReajusteService();
+		this.funcionario = new Funcionario("Ana", LocalDate.now(), new BigDecimal(1000));
+	}
+	
+//	@AfterEach //Inicializar após os métodos de testes finalizados
+//	public void finalizar() {
+//		System.out.println("Finalizar");
+//	}
+
 	@Test
 	public void reajusteDeveriaSerDeTresPorCentoQuandoDesempenhoForADesejar() {
-		ReajusteService service = new ReajusteService();
-		Funcionario funcionario = new Funcionario("Ana", LocalDate.now(), new BigDecimal(1000));
+		funcionario = new Funcionario("Ana", LocalDate.now(), new BigDecimal(1000));
 		
 		service.concederReajuste(funcionario, Desempenho.A_DESEJAR);
 		
@@ -25,7 +38,6 @@ public class ReajusteServiceTest {
 	
 	@Test
 	public void reajusteDeveriaSerDeQuinzePorCentoQuandoDesempenhoForBom() {
-		ReajusteService service = new ReajusteService();
 		Funcionario funcionario = new Funcionario("Pedro", LocalDate.now(), new BigDecimal(1000));
 		
 		service.concederReajuste(funcionario, Desempenho.BOM);
@@ -35,7 +47,6 @@ public class ReajusteServiceTest {
 	
 	@Test
 	public void reajusteDeveriaSerDeVintePorCentoQuandoDesempenhoForOtimo() {
-		ReajusteService service = new ReajusteService();
 		Funcionario funcionario = new Funcionario("Joao", LocalDate.now(), new BigDecimal(1000));
 		
 		service.concederReajuste(funcionario, Desempenho.OTIMO);
